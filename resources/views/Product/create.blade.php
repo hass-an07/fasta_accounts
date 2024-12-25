@@ -69,18 +69,18 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="sku">Sku</label>
-                                <input type="text" value="{{old('sku')}}" name="sku" id="sku" class="form-control"
-                                    placeholder="Sku">
-                                <span class="text-danger">
-                                    @error('sku')
-                                    {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                        </div>
+                        <!--<div class="col-md-6">-->
+                        <!--    <div class="mb-3">-->
+                        <!--        <label for="sku">Sku</label>-->
+                        <!--        <input type="text" value="{{old('sku')}}" name="sku" id="sku" class="form-control"-->
+                        <!--            placeholder="Sku">-->
+                        <!--        <span class="text-danger">-->
+                        <!--            @error('sku')-->
+                        <!--            {{ $message }}-->
+                        <!--            @enderror-->
+                        <!--        </span>-->
+                        <!--    </div>-->
+                        <!--</div>-->
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="status">status</label>

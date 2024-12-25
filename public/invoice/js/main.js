@@ -1,30 +1,38 @@
-  /* *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
-  /////////////////   Down Load Button Function   /////////////////
-  *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** */
- 
 (function ($) {
-  'use strict';
+  "use strict";
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const downloadBtn = document.getElementById('tm_download_btn');
-
-    downloadBtn.addEventListener('click', function() {
-        // Target the invoice section
-        const invoiceSection = document.getElementById('tm_download_section');
-
-        // Use html2canvas to capture the invoice section
-        html2canvas(invoiceSection, { scale: 2 }).then(canvas => {
-            // Convert the canvas to an image
-            const imgData = canvas.toDataURL('image/png');
-
-            // Create a link element for downloading
-            const link = document.createElement('a');
+  /*----------- 01. Print and Download Button ----------*/
+  (function ($) {
+    "use strict";
+  
+    /*----------- 01. Download as Image Button ----------*/
+    $('#download_btn').on('click', function () {
+        var downloadSection = $('#download_section');
+        var scale = 2; // Scale to enhance image quality
+  
+        html2canvas(downloadSection[0], {
+            scale: scale,
+            useCORS: true
+        }).then(function (canvas) {
+            var imgData = canvas.toDataURL('image/png'); // Change 'image/png' to 'image/jpeg' for JPEG format
+            var link = document.createElement('a');
             link.href = imgData;
-            link.download = 'invoice.png';
+            link.download = 'downloaded-content.png'; // Change the filename and extension as needed
             link.click();
         });
     });
-});
+  
+    // Print HTML Document
+    $('.print_btn').on('click', function () {
+        window.print();
+    });
+  
+  })(jQuery);
+  
 
+  // Print HTML Document
+  $('.print_btn').on('click', function () {
+      window.print();
+  });
 
 })(jQuery);

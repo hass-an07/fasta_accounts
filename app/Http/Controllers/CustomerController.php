@@ -30,24 +30,24 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'business_name' => 'required|unique:customers,business_name',
-            'email' => 'required|unique:customers,email',
-            'first_name' => 'required',
-            'mobile' => 'required',
-            'account_number' => 'min:10',
-            'string',
-            'size:11', // Ensure the exact length is 12
-            'regex:/^\d{11}$/',
-            'billing_address' => 'required',
-            'country' => 'required',
-            'city' => 'required',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'business_name' => 'nullable',
+        //     'email' => 'nullable',
+        //     'first_name' => 'nullable',
+        //     'mobile' => 'nullable',
+        //     'account_number' => 'min:10',
+        //     'string',
+        //     'size:11', // Ensure the exact length is 12
+        //     'regex:/^\d{11}$/',
+        //     'billing_address' => 'nullable',
+        //     'country' => 'nullable',
+        //     'city' => 'nullable',
+        // ]);
 
-        if ($validator->fails()) {
-            // Return back with validation errors
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if ($validator->fails()) {
+        //     // Return back with validation errors
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         $customer = new  Customer();
 

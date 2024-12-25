@@ -30,23 +30,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0|digits_between:1,8|regex:/^\d+(\.\d{1,2})?$/',
-            'sku' => 'required|string|unique:products,sku|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:active,inactive',
-        ]);
+        // $validator = Validator::make($request->all(),[
+        //     'name' => 'required|string|max:255',
+        //     'description' => 'nullable|string',
+        //     'price' => 'required|numeric|min:0|digits_between:1,8|regex:/^\d+(\.\d{1,2})?$/',
+        //     'sku' => 'nullable|string|unique:products,sku|max:255',
+        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'status' => 'required|in:active,inactive',
+        // ]);
 
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // if($validator->fails()){
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
         $product = new Product();
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->sku = $request->sku;
+        // $product->sku = $request->sku;
         // $product->image = $request->image;
         $product->status = $request->status;
         $product->created_by = $request->created_by;
@@ -67,7 +67,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        return view('Product.edit',compact('product'));
     }
 
     /**
@@ -75,7 +76,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->status = $request->status;
+        $product->update();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -83,6 +91,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+    
+        // Redirect to the invoices index route with a success message
+        return redirect()->route('product.index')->with('success', 'Product deleted successfully.');
     }
 }

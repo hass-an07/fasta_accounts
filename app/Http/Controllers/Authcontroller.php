@@ -42,7 +42,7 @@ class Authcontroller extends Controller
 
             if ($register) {
                 session()->flash('success', 'You have been registered successfully');
-                return redirect()->route('account.login');
+                return redirect()->route('dashboard.index');
             }
         } else {
             echo 'something went wrong';

@@ -5,7 +5,7 @@
     <div class="container-fluid my-2">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Create Cro</h1>
+                <h1>Create Member</h1>
             </div>
             <div class="col-sm-6 text-right">
                 <a href="{{route('cro.index')}}" class="btn btn-primary">Back</a>
@@ -44,7 +44,7 @@
                                     @enderror
                                 </span>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="first_name">First Name</label>
@@ -128,7 +128,25 @@
                                     @enderror
                                 </span>
                             </div>
-                        </div> 
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="customer_id">Customer</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="member">Member</option>
+                                    <option value="trainer">Trainer</option>
+                                    <option value="CRO">CRO</option>
+                                    <!--<option value="Office Managment">Office Managment</option>-->
+
+                                </select>
+                                <span class="text-danger">
+                                    @error('role')
+                                    {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -149,8 +167,8 @@
 
 @section('customjs')
 {{-- <script>
-    Dropzone.autoDiscover = false;    
-    const dropzone = $("#image").dropzone({ 
+    Dropzone.autoDiscover = false;
+    const dropzone = $("#image").dropzone({
     init: function() {
         this.on('addedfile', function(file) {
             if (this.files.length > 1) {

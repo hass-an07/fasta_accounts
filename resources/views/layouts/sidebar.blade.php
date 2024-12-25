@@ -16,7 +16,7 @@
                     <a href="{{route('dashboard.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
-                    </a>																
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('customer.index')}}" class="nav-link">
@@ -27,7 +27,7 @@
                 <li class="nav-item">
                     <a href="{{route('cro.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
-                        <p>CRO</p>
+                        <p>Members</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -40,6 +40,12 @@
                     <a href="{{route('invoices.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Invoices</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('memberInvoice.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
+                        <p>Member Invoices</p>
                     </a>
                 </li>
             </ul>

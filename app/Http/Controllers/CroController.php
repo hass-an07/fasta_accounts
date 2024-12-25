@@ -11,9 +11,17 @@ class CroController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cros = Cro::query()->paginate(10);
+        $keyword = $request->get('keyword');
+
+        $cros = Cro::query()
+        ->when($keyword, function ($query) use ($keyword) {
+            $query->where('first_name', 'like', '%' . $keyword . '%')  // Search by invoice number
+            ->orWhere('role', 'like', '%' . $keyword . '%');
+        })
+        ->orderBy('id','desc')
+        ->paginate(10);
         return view('Cro.list',compact('cros'));
     }
 
@@ -30,18 +38,18 @@ class CroController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'company_name' => 'required',
-            'first_name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'hire_date' => 'required',
-            'salary' => 'required',
-        ]);
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // $validator = Validator::make($request->all(),[
+        //     'company_name' => 'required',
+        //     'first_name' => 'required',
+        //     'email' => 'nullable',
+        //     'phone' => 'required',
+        //     'address' => 'nullable',
+        //     'hire_date' => 'nullable',
+        //     'salary' => 'required',
+        // ]);
+        // if($validator->fails()){
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         $cro = new Cro();
 
@@ -51,6 +59,7 @@ class CroController extends Controller
         $cro->email = $request->email;
         $cro->phone = $request->phone;
         $cro->address = $request->address;
+        $cro->role=$request->role;
         $cro->hire_date = $request->hire_date;
         $cro->salary = $request->salary;
         $cro->save();
@@ -71,7 +80,8 @@ class CroController extends Controller
      */
     public function edit(string $id)
     {
-        //
+          $member = Cro::find($id);
+        return view('Cro.edit',compact('member'));
     }
 
     /**
@@ -79,7 +89,20 @@ class CroController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $cro = Cro::findOrFail($id);
+
+$cro->company_name = $request->company_name;
+$cro->first_name = $request->first_name;
+$cro->last_name = $request->last_name;
+$cro->email = $request->email;
+$cro->phone = $request->phone;
+$cro->address = $request->address;
+$cro->role = $request->role;
+$cro->hire_date = $request->hire_date;
+$cro->salary = $request->salary;
+$cro->save();
+
+return redirect()->route('cro.index');
     }
 
     /**

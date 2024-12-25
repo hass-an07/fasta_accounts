@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cro;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,7 +13,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('Dashboard.dashboard');
+        $invoice = Invoice::all()->count();
+        $cros = Cro::all()->count();
+        // dd($invoice);
+        return view('Dashboard.dashboard',compact('cros','invoice'));
+    }
+    public function showHome()
+    {
+        $invoice = Invoice::all()->count();
+        $cros = Cro::all()->count();
+        // dd($invoice);
+        return view('Dashboard.dashboard',compact('cros','invoice'));
     }
 
     /**
